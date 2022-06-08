@@ -53,3 +53,16 @@ class Booking {
     return finalFee; // return the final fee
   }
 }
+
+
+const totalOccupancyPercentage = (rooms, startDate, endDate) => {
+// returns the total occupancy percentage across all rooms in the array
+// total  % de habitaciones ocupadas
+
+}
+
+const availableRooms = (rooms, startDate, endDate) => {
+// returns all rooms in the array that are not occupied for the entire duration
+// total  % de habitaciones NO ocupadas
+
+}
