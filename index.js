@@ -73,8 +73,8 @@ const availableRooms = (rooms, startDate, endDate) => {
   const occupancyRooms = totalOccupancyPercentage(rooms, startDate, endDate); // total % of occupied rooms
   const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
 
-  const availableRooms =
+  const totalPercentageOfAvailableRooms =
     Math.round(totalPercentage - occupancyRoomsInDecimal) * 100; // calculate the % of the available rooms
 
-  return availableRooms;
+  return totalPercentageOfAvailableRooms;
 };
