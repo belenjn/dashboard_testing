@@ -25,7 +25,7 @@ class Room {
 
       return Math.round(
         (reservedBookings.length / totalNumberOfBookings) * 100
-      ); // and return the rounded percentage of the occupancy
+      ); // and return the rounded percentage
     });
   }
 }
@@ -54,15 +54,20 @@ class Booking {
   }
 }
 
-
 const totalOccupancyPercentage = (rooms, startDate, endDate) => {
-// returns the total occupancy percentage across all rooms in the array
-// total  % de habitaciones ocupadas
+  // returns the total occupancy percentage across all rooms in the array
 
-}
+  const totalRooms = rooms.length; // total number of rooms
+
+  const totalPercentagePerRoom = occupancyPercentage(startDate, endDate); // % per room
+  const totalPercentagePerRoomInDecimal = Math.round(
+    totalPercentagePerRoom / 100
+  ); // convert the % in decimal (per room)
+
+  return (totalRooms * totalPercentagePerRoomInDecimal) / 100; // multiplies total rooms per the percentage in decimal and is divided to have the % total
+};
 
 const availableRooms = (rooms, startDate, endDate) => {
-// returns all rooms in the array that are not occupied for the entire duration
-// total  % de habitaciones NO ocupadas
-
-}
+  // returns all rooms in the array that are not occupied for the entire duration
+  // total  % de habitaciones NO ocupadas
+};
