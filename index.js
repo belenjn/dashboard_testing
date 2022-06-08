@@ -55,8 +55,6 @@ class Booking {
 }
 
 const totalOccupancyPercentage = (rooms, startDate, endDate) => {
-  // returns the total occupancy percentage across all rooms in the array
-
   const totalRooms = rooms.length; // total number of rooms
 
   const totalPercentagePerRoom = occupancyPercentage(startDate, endDate); // % per room
@@ -64,10 +62,19 @@ const totalOccupancyPercentage = (rooms, startDate, endDate) => {
     totalPercentagePerRoom / 100
   ); // convert the % in decimal (per room)
 
-  return (totalRooms * totalPercentagePerRoomInDecimal) / 100; // multiplies total rooms per the percentage in decimal and is divided to have the % total
+  const totalPercentageOfRooms =
+    Math.round(totalRooms * totalPercentagePerRoomInDecimal) / 100; // multiplies total rooms per the percentage in decimal and is divided to have the % total
+  return totalPercentageOfRooms;
 };
 
 const availableRooms = (rooms, startDate, endDate) => {
-  // returns all rooms in the array that are not occupied for the entire duration
-  // total  % de habitaciones NO ocupadas
+  const totalPercentage = 100; // the highest valur of a % is 100
+
+  const occupancyRooms = totalOccupancyPercentage(rooms, startDate, endDate); // total % of occupied rooms
+  const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
+
+  const availableRooms =
+    Math.round(totalPercentage - occupancyRoomsInDecimal) * 100; // calculate the % of the available rooms
+
+  return availableRooms;
 };
