@@ -78,3 +78,5 @@ const availableRooms = (rooms, startDate, endDate) => {
 
   return totalPercentageOfAvailableRooms;
 };
+
+module.exports = { Room, Booking };
