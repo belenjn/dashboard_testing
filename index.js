@@ -23,7 +23,9 @@ class Room {
       startDate >= booking.check_in && endDate <= booking.check_out; // if the range of dates provided matches with the dates
       reservedBookings.push(booking); // add the reservations at bookingsReserved
 
-      return Math.round((reservedBookings.length / totalNumberOfBookings) * 100); // and return the rounded percentage of the occupancy
+      return Math.round(
+        (reservedBookings.length / totalNumberOfBookings) * 100
+      ); // and return the rounded percentage of the occupancy
     });
   }
 }
@@ -38,5 +40,14 @@ class Booking {
     this.room = room; // a room object
   }
 
-  
+  getFee(fee) {
+    let finalFee; // fist declaration for the final fee's price
+    const roomDiscount = Room.discount;
+    const roomDiscountToDecimal = Math.round(roomDiscount / 100); // turn the % of Room's discount into decimal
+    const guestDiscountToDecimal = Math.round(this.discount / 100); // turn the % of Booking's discourn into decimal
+
+    finalFee = fee - roomDiscountToDecimal - guestDiscountToDecimal; // the final fee's value is that subtraction
+
+    return finalFee; // return the final fee
+  }
 }
