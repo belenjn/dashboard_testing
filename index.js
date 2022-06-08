@@ -40,10 +40,12 @@ class Booking {
     this.room = room; // a room object
   }
 
-  getFee(fee) {
-    let finalFee; // fist declaration for the final fee's 
-    const roomDiscount = Room.discount;
-    const roomDiscountToDecimal = Math.round(roomDiscount / 100); // turn the % of Room's discount into decimal
+  getFee() {
+    let fee = Room.rate; // Room's rate
+
+    let finalFee; // fist declaration for the final fee's
+
+    const roomDiscountToDecimal = Math.round(Room.discount / 100); // turn the % of Room's discount into decimal
     const guestDiscountToDecimal = Math.round(this.discount / 100); // turn the % of Booking's discourn into decimal
 
     finalFee = fee - roomDiscountToDecimal - guestDiscountToDecimal; // the final fee's value is that subtraction
