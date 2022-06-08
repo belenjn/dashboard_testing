@@ -11,7 +11,7 @@ class Room {
       // if the date matches a date's reservation
       date >= booking.check_in && date <= booking.check_out
         ? booking.name // return the guest's name
-        : false; // otherwise, return false
+        : false // otherwise, return false
     });
   }
 
