@@ -7,20 +7,12 @@ class Room {
   }
 
   isOccupied(date) {
-    if (this.bookings.length) {
-      // if it's occupied return the guest
-      for (let i = 0; i < this.bookings.length; i++) {
-        if (
-          date >= this.bookings[i].check_in &&
-          date <= this.bookings[i].check_out
-        ) {
-          return this.bookings[i].name; // the guest's name
-        }
-      }
-    } else {
-      // if it's not occupied return false
-      return false;
-    }
+    this.bookings.forEach(booking => {
+        date >= booking.check_in && date <= booking.check_out
+        ? (booking.name)
+        : false
+
+    });
   }
 }
 
