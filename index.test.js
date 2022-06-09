@@ -129,19 +129,19 @@ describe("Booking: getFee()", () => {
     expect(booking.getFee().toBe(250)); /* 500 * 0.50 = 250 | 500 - 250 = 250 */
   });
 
-  test("If there is discount (booking: 15%): ", () => {
+  test("If there is discount (booking: 25%): ", () => {
     const booking = new Booking({
       ...bookingTemplateExample,
       discount: 15,
     });
-    expect(booking.getFee().toBe(425)); /* 500 * 0.15 = 75 | 500 - 75 = 425 */
+    expect(booking.getFee().toBe(375)); /* 500 * 0.25 = 125 | 500 - 125 = 375 */
   });
 
-  test("If there is discount (booking: 50%): ", () => {
+  test("If there is discount (booking: 70%): ", () => {
     const booking = new Booking({
       ...bookingTemplateExample,
       discount: 50,
     });
-    expect(booking.getFee().toBe(250)); /* 500 * 0.50 = 250 | 500 - 250 = 250 */
+    expect(booking.getFee().toBe(250)); /* 500 * 0.70 = 350 | 500 - 350 = 150 */
   });
 });
