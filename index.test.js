@@ -168,8 +168,8 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
 
   test(" If there are reservations, it returns the percentage of the rooms occupied", () => {
     /* 
-        Bookings for Suite: 4 /10 
-        Bookings for Double Suite: 4 / 10 
+        Bookings for Suite: 4
+        Bookings for Double Suite: 4 
         Total reservations: 8
         Limit of Bookings: 100
 
@@ -197,8 +197,8 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
 
   test(" If it is fully booked, it returns 100%", () => {
     /* 
-        Bookings for Suite: 8 / 8
-        Bookings for Double Suite: 8 / 8
+        Bookings for Suite: 8
+        Bookings for Double Suite: 8 
         Total: 16
         Limit of bookings: 16
 
@@ -264,5 +264,86 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
         endDate: "23 Nov 2019 14:00 UTC",
       })
     ).toBe(100);
+  });
+});
+
+describe("Room and Booking: availableRooms()", () => {
+  const bookings = [
+    {
+      ...bookingTemplateExample,
+      check_in: "1 Jan 2019 14:00 UTC",
+      check_out: "6 Jan 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "4 Apr 2019 14:00 UTC",
+      check_out: "10 Apr 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "6 Jun 2019 14:00 UTC",
+      check_out: "10 Jun 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "13 Jul 2019 14:00 UTC",
+      check_out: "23 Jul 2019 14:00 UTC",
+    },
+  ];
+
+  test("Return the availables rooms ", () => {
+    /* 
+        Bookings for Suite: 4
+        Bookings for Double Suite: 4
+        Total reservations: 8
+        Limit of Bookings: 100
+
+        Total percentage expected: 8% => 0.8 percentage in decimal
+       */
+    const rooms = [
+      new Room({ ...roomTemplateExample, bookings: bookings }),
+      new Room({
+        ...roomTemplateExample,
+        name: "double suite",
+        bookings: bookings,
+      }),
+    ];
+
+    //(100 - 0.8) / 100 = 0.992 => rounded: 1% => 0.1 percentage of occupied rooms
+    const totalAvailablesRooms = 99; //(100 - 0.1) * 100 => 99% available rooms
+
+    expect(
+      availableRooms({
+        rooms: [...rooms],
+        startDate: "1 Jan 2019 14:00 UTC",
+        endDate: "23 Jul 2019 14:00 UTC",
+      })
+    ).toBe(totalAvailablesRooms);
+  });
+
+  test("If there aren't availables rooms, return false ", () => {
+    /* 
+        Bookings for Suite: 4 
+        Bookings for Double Suite: 4
+        Total reservations: 8
+        Limit of Bookings: 100
+
+       */
+    const rooms = [
+      new Room({ ...roomTemplateExample, bookings: bookings }),
+      new Room({
+        ...roomTemplateExample,
+        name: "double suite",
+        bookings: bookings,
+      }),
+    ];
+
+    expect(
+      availableRooms({
+        rooms: [...rooms],
+        startDate: "1 Jan 2019 14:00 UTC",
+        endDate: "23 Jul 2019 14:00 UTC",
+      })
+    ).toBeFalsy();
   });
 });
