@@ -176,7 +176,7 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
         ( 8 / 100) * 100 = 8
 
         Total percentage expected: 8%
-       */
+    */
     const rooms = [
       new Room({ ...roomTemplateExample, bookings: bookings }),
       new Room({
