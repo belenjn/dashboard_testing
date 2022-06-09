@@ -16,8 +16,7 @@ const bookingTemplateExample = {
   room: { ...templateRoomExample },
 };
 
-describe("Room and Booking", () => {
-  /* isOccuped() */
+describe("Room: isOccuped()", () => {
   test("If the room is not occupied and the bookings are empty", () => {
     const room = new Room({ ...templateRoomExample });
     expect(room.isOccupied("5 Oct 2021 14:00 UTC")).toBeFalsy();
@@ -30,10 +29,14 @@ describe("Room and Booking", () => {
     expect(room.isOccupied("1 Jan 2019 14:00 UTC")).toBeFalsy();
   });
 
-  test("If the room is occupied, return the name of th guest", () => {
+  test("If the room is occupied, return the name of the guest", () => {
     const booking = new Booking({ ...bookingTemplateExample });
     const room = new Room({ ...templateRoomExample, bookings: booking });
     room.bookings = [booking];
     expect(room.isOccupied("25 May 2022 14:00 UTC")).toBe("Belén Jaraba");
   });
 });
+
+
+
+
