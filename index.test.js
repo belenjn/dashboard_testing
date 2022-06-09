@@ -195,7 +195,7 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
     ).toBe(8);
   });
 
-  test(" If there are reservations, it returns 100%", () => {
+  test(" If it is fully booked, it returns 100%", () => {
     /* 
         Bookings for Suite: 8 / 8
         Bookings for Double Suite: 8 / 8
