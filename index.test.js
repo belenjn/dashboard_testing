@@ -173,7 +173,7 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
         Total reservations: 8
         Limit of Bookings: 100
 
-        (8 * 100) / 100 = 8
+        ( 8 / 100) * 100 = 8
 
         Total percentage expected: 8%
        */
@@ -298,8 +298,8 @@ describe("Room and Booking: availableRooms()", () => {
         Total reservations: 8
         Limit of Bookings: 100
 
-        Total percentage expected: 8% => 0.8 percentage in decimal
-       */
+        Total percentage expected: 8% => 0.08 percentage in decimal
+    */
     const rooms = [
       new Room({ ...roomTemplateExample, bookings: bookings }),
       new Room({
@@ -309,7 +309,7 @@ describe("Room and Booking: availableRooms()", () => {
       }),
     ];
 
-    //(100 - 0.8) / 100 = 0.992 => rounded: 1% => 0.1 percentage of occupied rooms
+    //(100 - 0.08) / 100 = 0.992 => rounded: 1% => 0.1 percentage of occupied rooms
     const totalAvailablesRooms = 99; //(100 - 0.1) * 100 => 99% available rooms
 
     expect(
@@ -326,9 +326,10 @@ describe("Room and Booking: availableRooms()", () => {
         Bookings for Suite: 4 
         Bookings for Double Suite: 4
         Total reservations: 8
+
         Limit of Bookings: 100
 
-       */
+    */
     const rooms = [
       new Room({ ...roomTemplateExample, bookings: bookings }),
       new Room({
