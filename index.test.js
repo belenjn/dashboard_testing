@@ -3,7 +3,7 @@ const { Room, Booking } = require("./index");
 const roomTemplateExample = {
   name: "suite",
   bookings: [],
-  rate: 230,
+  rate: 500,
   discount: 0,
 };
 
@@ -15,6 +15,8 @@ const bookingTemplateExample = {
   discount: 0,
   room: { ...roomTemplateExample },
 };
+
+/*
 
 describe("Room: isOccuped()", () => {
   test("If the room is not occupied and the bookings are empty", () => {
@@ -103,4 +105,45 @@ describe("Room: occupancyPercentage()", () => {
   });
 
   
+});
+
+*/
+
+describe("Booking: getFee()", () => {
+  test("If there is not any discount: ", () => {
+    const booking = new Booking({ ...bookingTemplateExample });
+    expect(booking.getFee().toBe(500));
+  });
+
+  test("If there is discount (rooms: 15%): ", () => {
+    const booking = new Booking({
+      ...bookingTemplateExample,
+      room: { ...roomTemplateExample, discount: 15 },
+    });
+    expect(booking.getFee().toBe(425)); /* 500 * 0.15 = 75 | 500 - 75 = 425 */
+  });
+
+  test("If there is discount (rooms: 50%): ", () => {
+    const booking = new Booking({
+      ...bookingTemplateExample,
+      room: { ...roomTemplateExample, discount: 50 },
+    });
+    expect(booking.getFee().toBe(250)); /* 500 * 0.50 = 250 | 500 - 250 = 250 */
+  });
+
+  test("If there is discount (booking: 15%): ", () => {
+    const booking = new Booking({
+      ...bookingTemplateExample,
+      discount: 15,
+    });
+    expect(booking.getFee().toBe(425)); /* 500 * 0.15 = 75 | 500 - 75 = 425 */
+  });
+
+  test("If there is discount (booking: 50%): ", () => {
+    const booking = new Booking({
+      ...bookingTemplateExample,
+      discount: 50,
+    });
+    expect(booking.getFee().toBe(250)); /* 500 * 0.50 = 250 | 500 - 250 = 250 */
+  });
 });
