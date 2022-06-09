@@ -16,7 +16,6 @@ const bookingTemplateExample = {
   room: { ...roomTemplateExample },
 };
 
-
 describe("Room: isOccuped()", () => {
   test("If the room is not occupied and the bookings are empty", () => {
     const room = new Room({ ...roomTemplateExample });
@@ -92,7 +91,7 @@ describe("Room: occupancyPercentage()", () => {
         ...bookingTemplateExample,
         check_in: "1 Aug 2019 14:00 UTC",
         check_out: "10 Aug 2019 14:00 UTC",
-      }
+      },
     ];
     const room = new Room({ ...roomTemplateExample, bookings: bookings });
     expect(
@@ -102,10 +101,7 @@ describe("Room: occupancyPercentage()", () => {
       })
     ).toBe(75);
   });
-
-  
 });
-
 
 describe("Booking: getFee()", () => {
   test("If there is not any discount: ", () => {
@@ -146,10 +142,127 @@ describe("Booking: getFee()", () => {
   });
 });
 
+describe("Room and Booking: totalOccupancyPercentage()", () => {
+  const bookings = [
+    {
+      ...bookingTemplateExample,
+      check_in: "1 Jan 2019 14:00 UTC",
+      check_out: "6 Jan 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "4 Apr 2019 14:00 UTC",
+      check_out: "10 Apr 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "6 Jun 2019 14:00 UTC",
+      check_out: "10 Jun 2019 14:00 UTC",
+    },
+    {
+      ...bookingTemplateExample,
+      check_in: "13 Jul 2019 14:00 UTC",
+      check_out: "23 Jul 2019 14:00 UTC",
+    },
+  ];
 
-describe('Room and Booking: totalOccupancyPercentage()', () => {
-    test(' ', () => {
-        
-    });
-    
+  test(" If there are reservations, it returns the percentage of the rooms occupied", () => {
+    /* 
+        Bookings for Suite: 4 /10 
+        Bookings for Double Suite: 4 / 10 
+        Total reservations: 8
+        Limit of Bookings: 100
+
+        (8 * 100) / 100 = 8
+
+        Total percentage expected: 8%
+       */
+    const rooms = [
+      new Room({ ...roomTemplateExample, bookings: bookings }),
+      new Room({
+        ...roomTemplateExample,
+        name: "double suite",
+        bookings: bookings,
+      }),
+    ];
+
+    expect(
+      totalOccupancyPercentage({
+        rooms: [...rooms],
+        startDate: "1 Jan 2019 14:00 UTC",
+        endDate: "23 Jul 2019 14:00 UTC",
+      })
+    ).toBe(8);
+  });
+
+  test(" If there are reservations, it returns 100%", () => {
+    /* 
+        Bookings for Suite: 8 / 8
+        Bookings for Double Suite: 8 / 8
+        Total: 16
+        Limit of bookings: 16
+
+        Total percentage expected: 100%
+       */
+
+    const bookings2 = [
+      {
+        ...bookingTemplateExample,
+        check_in: "1 Jan 2019 14:00 UTC",
+        check_out: "6 Jan 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "4 Apr 2019 14:00 UTC",
+        check_out: "10 Apr 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "6 Jun 2019 14:00 UTC",
+        check_out: "10 Jun 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "13 Jul 2019 14:00 UTC",
+        check_out: "23 Jul 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "1 Aug 2019 14:00 UTC",
+        check_out: "6 Aug 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "7 Sep 2019 14:00 UTC",
+        check_out: "10 Sep 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "6 Oct 2019 14:00 UTC",
+        check_out: "10 Oct 2019 14:00 UTC",
+      },
+      {
+        ...bookingTemplateExample,
+        check_in: "13 Nov 2019 14:00 UTC",
+        check_out: "23 Nov 2019 14:00 UTC",
+      },
+    ];
+
+    const rooms = [
+      new Room({ ...roomTemplateExample, bookings: bookings }),
+      new Room({
+        ...roomTemplateExample,
+        name: "double suite",
+        bookings: bookings2,
+      }),
+    ];
+
+    expect(
+      totalOccupancyPercentage({
+        rooms: [...rooms],
+        startDate: "1 Jan 2019 14:00 UTC",
+        endDate: "23 Nov 2019 14:00 UTC",
+      })
+    ).toBe(100);
+  });
 });
