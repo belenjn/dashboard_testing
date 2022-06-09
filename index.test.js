@@ -16,7 +16,6 @@ const bookingTemplateExample = {
   room: { ...roomTemplateExample },
 };
 
-/*
 
 describe("Room: isOccuped()", () => {
   test("If the room is not occupied and the bookings are empty", () => {
@@ -107,7 +106,6 @@ describe("Room: occupancyPercentage()", () => {
   
 });
 
-*/
 
 describe("Booking: getFee()", () => {
   test("If there is not any discount: ", () => {
