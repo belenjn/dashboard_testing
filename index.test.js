@@ -144,7 +144,7 @@ describe("Booking: getFee()", () => {
   test("If there is discount (booking: 25%) return the percentage: ", () => {
     const booking = new Booking({
       ...bookingTemplateExample,
-      discount: 15,
+      discount: 25,
     });
     expect(booking.getFee()).toBe(375); /* 500 * 0.25 = 125 | 500 - 125 = 375 */
   });
