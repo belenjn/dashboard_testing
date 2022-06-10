@@ -8,29 +8,30 @@ class Room {
 
   isOccupied(date) {
     const bookings = this.bookings;
-    if(this.bookings.length){
-       // if the date matches a date's reservation
-        for(let i = 0; i < bookings.length; i++){
-            if(date >= bookings[i].checkIn && date <= bookings[i].checkOut) return bookings[i].name; // return the guest's name
-        }
-        return false; // otherwise, return false
+    if (this.bookings.length) {
+      // if the date matches a date's reservation
+      for (let i = 0; i < bookings.length; i++) {
+        if (date >= bookings[i].checkIn && date <= bookings[i].checkOut)
+          return bookings[i].name; // return the guest's name
+      }
+      return false; // otherwise, return false
     }
     return false;
   }
 
   occupancyPercentage(startDate, endDate) {
+    const bookings = this.bookings;
+
     let reservedBookings = []; // array for the reserved bookings
     let totalNumberOfBookings = this.bookings.length; // total number of the bookings
 
-    this.bookings.forEach((booking) => {
-      startDate >= booking.checkIn && endDate <= booking.checkOut; // if the range of dates provided matches with the dates
-      reservedBookings.push(booking); // add the reservations at bookingsReserved
+    for (let i = 0; i < bookings.length; i++) {
+      if (startDate >= bookings[i].checkIn && endDate <= bookings[i].checkOut) {
+        reservedBookings.push(this.bookings[i]);
+      }
+    }
 
-    });
-
-    return Math.round(
-      (reservedBookings.length / totalNumberOfBookings) * 100
-    ); // and return the rounded percentage
+    return Math.round((reservedBookings.length / totalNumberOfBookings) * 100); // and return the rounded percentage
   }
 }
 
@@ -45,16 +46,25 @@ class Booking {
   }
 
   getFee() {
-    let fee = Room.rate; // Room's rate
+    // let fee = Room.rate; // Room's rate
 
-    let finalFee; // fist declaration for the final fee's
+    // let finalFee; // fist declaration for the final fee's
 
-    const roomDiscountToDecimal = Math.round(Room.discount / 100); // turn the % of Room's discount into decimal
-    const guestDiscountToDecimal = Math.round(this.discount / 100); // turn the % of Booking's discourn into decimal
+    // const roomDiscountToDecimal = Room.discount / 100; // turn the % of Room's discount into decimal
+    // const guestDiscountToDecimal = this.discount / 100; // turn the % of Booking's discourn into decimal
 
-    finalFee = fee - roomDiscountToDecimal - guestDiscountToDecimal; // the final fee's value is that subtraction
+    // const totalDiscount = roomDiscountToDecimal + guestDiscountToDecimal;
 
-    return finalFee; // return the final fee
+    // finalFee = (fee - totalDiscount) * 100; // the final fee's value is that subtraction
+
+    // return finalFee; // return the final fee
+
+    const rate = this.room.rate;
+    const discountRoom = rate * (this.room.discount / 100);
+    const discountBooking = rate * (this.discount / 100);
+    const totalDiscount = discountRoom + discountBooking;
+    const price = totalDiscount > rate ? 0 : (rate - totalDiscount) / 100;
+    return price;
   }
 }
 

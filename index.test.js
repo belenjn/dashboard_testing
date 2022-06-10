@@ -1,9 +1,14 @@
-const { Room, Booking, totalOccupancyPercentage, availableRooms} = require("./index");
+const {
+  Room,
+  Booking,
+  totalOccupancyPercentage,
+  availableRooms,
+} = require("./index");
 
 const roomTemplateExample = {
   name: "suite",
   bookings: [],
-  rate: 500,
+  rate: 50000,
   discount: 0,
 };
 
@@ -30,10 +35,12 @@ describe("Room: isOccuped()", () => {
   });
 
   test("If the room is occupied, return the name of the guest", () => {
-    const room = new Room({...roomTemplateExample})
-    const booking1 = new Booking({...bookingTemplateExample});
+    const room = new Room({ ...roomTemplateExample });
+    const booking1 = new Booking({ ...bookingTemplateExample });
     room.bookings.push(booking1);
-    expect(room.isOccupied(new Date("25 May 2022 14:00 UTC").toISOString())).toBe("Belén Jaraba");
+    expect(
+      room.isOccupied(new Date("25 May 2022 14:00 UTC").toISOString())
+    ).toBe("Belén Jaraba");
   });
 });
 
@@ -105,8 +112,17 @@ describe("Room: occupancyPercentage()", () => {
 
 describe("Booking: getFee()", () => {
   test("If there is not any discount: ", () => {
-    const booking = new Booking({ ...bookingTemplateExample });
-    expect(booking.getFee()).toBe(500);
+    const room = new Room({ ...roomTemplateExample});
+    const booking = new Booking({
+        name:"Lorena Pérez",
+        email: "test2@jest.com",
+        checkin: new Date("4 Sep 2019 14:00 UTC").toDateString(),
+        checkout: new Date("24 Sep 2019 14:00 UTC").toISOString(),
+        discount: 0,
+        room: room
+      });
+      room.bookings.push(booking);
+      expect(booking.getFee()).toBe(500);
   });
 
   test("If there is discount (rooms: 15%) return the percentage: ", () => {
@@ -343,7 +359,7 @@ describe("Room and Booking: availableRooms()", () => {
       availableRooms({
         rooms: [...rooms],
         startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
-        endDate:new Date("23 Jul 2019 14:00 UTC").toISOString(),
+        endDate: new Date("23 Jul 2019 14:00 UTC").toISOString(),
       })
     ).toBeFalsy();
   });
