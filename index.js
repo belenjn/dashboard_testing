@@ -7,12 +7,15 @@ class Room {
   }
 
   isOccupied(date) {
-    this.bookings.forEach((booking) => {
-      // if the date matches a date's reservation
-      date >= booking.check_in && date <= booking.check_out
-        ? booking.name // return the guest's name
-        : false // otherwise, return false
-    });
+    const bookings = this.bookings;
+    if(this.bookings.length){
+       // if the date matches a date's reservation
+        for(let i = 0; i < bookings.length; i++){
+            if(date >= bookings[i].checkIn && date <= bookings[i].checkOut) return bookings[i].name; // return the guest's name
+        }
+        return false; // otherwise, return false
+    }
+    return false;
   }
 
   occupancyPercentage(startDate, endDate) {
@@ -20,22 +23,23 @@ class Room {
     let totalNumberOfBookings = this.bookings.length; // total number of the bookings
 
     this.bookings.forEach((booking) => {
-      startDate >= booking.check_in && endDate <= booking.check_out; // if the range of dates provided matches with the dates
+      startDate >= booking.checkIn && endDate <= booking.checkOut; // if the range of dates provided matches with the dates
       reservedBookings.push(booking); // add the reservations at bookingsReserved
 
-      return Math.round(
-        (reservedBookings.length / totalNumberOfBookings) * 100
-      ); // and return the rounded percentage
     });
+
+    return Math.round(
+      (reservedBookings.length / totalNumberOfBookings) * 100
+    ); // and return the rounded percentage
   }
 }
 
 class Booking {
-  constructor({ name, email, check_in, check_out, discount, room }) {
+  constructor({ name, email, checkIn, checkOut, discount, room }) {
     this.name = name; // string
     this.email = email; // string
-    this.check_in = check_in; // date
-    this.check_out = check_out; // date
+    this.checkIn = checkIn; // date
+    this.checkOut = checkOut; // date
     this.discount = discount; // int percentage
     this.room = room; // a room object
   }
@@ -79,4 +83,4 @@ const availableRooms = (rooms, startDate, endDate) => {
   return totalPercentageOfAvailableRooms;
 };
 
-module.exports = { Room, Booking };
+module.exports = { Room, Booking, totalOccupancyPercentage, availableRooms };
