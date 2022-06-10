@@ -42,25 +42,25 @@ describe("Room: occupancyPercentage()", () => {
     const bookings = [
       {
         ...bookingTemplateExample,
-        checkIn: "1 Jan 2019 14:00 UTC",
-        checkOut: "6 Jan 2019 14:00 UTC",
+        checkIn: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("6 Jan 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "4 Apr 2019 14:00 UTC",
-        checkOut: "10 Apr 2019 14:00 UTC",
+        checkIn: new Date("4 Apr 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Apr 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "6 Jun 2019 14:00 UTC",
-        checkOut: "10 Jun 2019 14:00 UTC",
+        checkIn: new Date("6 Jun 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Jun 2019 14:00 UTC").toISOString(),
       },
     ];
     const room = new Room({ ...roomTemplateExample, bookings: bookings });
     expect(
       room.occupancyPercentage({
-        startDate: "1 Jan 2019 14:00 UTC",
-        endDate: "10 Jun 2019 14:00 UTC",
+        startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        endDate: new Date("10 Jun 2019 14:00 UTC").toISOString(),
       })
     ).toBe(25);
   });
@@ -69,35 +69,35 @@ describe("Room: occupancyPercentage()", () => {
     const bookings = [
       {
         ...bookingTemplateExample,
-        checkIn: "1 Jan 2019 14:00 UTC",
-        checkOut: "6 Jan 2019 14:00 UTC",
+        checkIn: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("6 Jan 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "4 Apr 2019 14:00 UTC",
-        checkOut: "10 Apr 2019 14:00 UTC",
+        checkIn: new Date("4 Apr 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Apr 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "6 Jun 2019 14:00 UTC",
-        checkOut: "10 Jun 2019 14:00 UTC",
+        checkIn: new Date("6 Jun 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Jun 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "13 Jul 2019 14:00 UTC",
-        checkOut: "23 Jul 2019 14:00 UTC",
+        checkIn: new Date("13 Jul 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("23 Jul 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "1 Aug 2019 14:00 UTC",
-        checkOut: "10 Aug 2019 14:00 UTC",
+        checkIn: new Date("1 Aug 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Aug 2019 14:00 UTC").toISOString(),
       },
     ];
     const room = new Room({ ...roomTemplateExample, bookings: bookings });
     expect(
       room.occupancyPercentage({
-        startDate: "4 Sep 2019 14:00 UTC",
-        endDate: "24 Sep 2019 14:00 UTC",
+        startDate: new Date("4 Sep 2019 14:00 UTC").toDateString(),
+        endDate: new Date("24 Sep 2019 14:00 UTC").toISOString(),
       })
     ).toBe(75);
   });
@@ -146,23 +146,23 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
   const bookings = [
     {
       ...bookingTemplateExample,
-      checkIn: "1 Jan 2019 14:00 UTC",
-      checkOut: "6 Jan 2019 14:00 UTC",
+      checkIn: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("6 Jan 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "4 Apr 2019 14:00 UTC",
-      checkOut: "10 Apr 2019 14:00 UTC",
+      checkIn: new Date("4 Apr 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("10 Apr 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "6 Jun 2019 14:00 UTC",
-      checkOut: "10 Jun 2019 14:00 UTC",
+      checkIn: new Date("6 Jun 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("10 Jun 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "13 Jul 2019 14:00 UTC",
-      checkOut: "23 Jul 2019 14:00 UTC",
+      checkIn: new Date("13 Jul 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("23 Jul 2019 14:00 UTC").toISOString(),
     },
   ];
 
@@ -189,8 +189,8 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
     expect(
       totalOccupancyPercentage({
         rooms: [...rooms],
-        startDate: "1 Jan 2019 14:00 UTC",
-        endDate: "23 Jul 2019 14:00 UTC",
+        startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        endDate: new Date("23 Jul 2019 14:00 UTC").toISOString(),
       })
     ).toBe(8);
   });
@@ -208,43 +208,43 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
     const bookings2 = [
       {
         ...bookingTemplateExample,
-        checkIn: "1 Jan 2019 14:00 UTC",
-        checkOut: "6 Jan 2019 14:00 UTC",
+        checkIn: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("6 Jan 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "4 Apr 2019 14:00 UTC",
-        checkOut: "10 Apr 2019 14:00 UTC",
+        checkIn: new Date("4 Apr 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Apr 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "6 Jun 2019 14:00 UTC",
-        checkOut: "10 Jun 2019 14:00 UTC",
+        checkIn: new Date("6 Jun 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Jun 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "13 Jul 2019 14:00 UTC",
-        checkOut: "23 Jul 2019 14:00 UTC",
+        checkIn: new Date("13 Jul 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("23 Jul 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "1 Aug 2019 14:00 UTC",
-        checkOut: "6 Aug 2019 14:00 UTC",
+        checkIn: new Date("1 Aug 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("6 Aug 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "7 Sep 2019 14:00 UTC",
-        checkOut: "10 Sep 2019 14:00 UTC",
+        checkIn: new Date("7 Sep 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Sep 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "6 Oct 2019 14:00 UTC",
-        checkOut: "10 Oct 2019 14:00 UTC",
+        checkIn: new Date("6 Oct 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("10 Oct 2019 14:00 UTC").toISOString(),
       },
       {
         ...bookingTemplateExample,
-        checkIn: "13 Nov 2019 14:00 UTC",
-        checkOut: "23 Nov 2019 14:00 UTC",
+        checkIn: new Date("13 Nov 2019 14:00 UTC").toISOString(),
+        checkOut: new Date("23 Nov 2019 14:00 UTC").toISOString(),
       },
     ];
 
@@ -260,8 +260,8 @@ describe("Room and Booking: totalOccupancyPercentage()", () => {
     expect(
       totalOccupancyPercentage({
         rooms: [...rooms],
-        startDate: "1 Jan 2019 14:00 UTC",
-        endDate: "23 Nov 2019 14:00 UTC",
+        startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        endDate: new Date("23 Nov 2019 14:00 UTC").toISOString(),
       })
     ).toBe(100);
   });
@@ -271,23 +271,23 @@ describe("Room and Booking: availableRooms()", () => {
   const bookings = [
     {
       ...bookingTemplateExample,
-      checkIn: "1 Jan 2019 14:00 UTC",
-      checkOut: "6 Jan 2019 14:00 UTC",
+      checkIn: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("6 Jan 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "4 Apr 2019 14:00 UTC",
-      checkOut: "10 Apr 2019 14:00 UTC",
+      checkIn: new Date("4 Apr 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("10 Apr 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "6 Jun 2019 14:00 UTC",
-      checkOut: "10 Jun 2019 14:00 UTC",
+      checkIn: new Date("6 Jun 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("10 Jun 2019 14:00 UTC").toISOString(),
     },
     {
       ...bookingTemplateExample,
-      checkIn: "13 Jul 2019 14:00 UTC",
-      checkOut: "23 Jul 2019 14:00 UTC",
+      checkIn: new Date("13 Jul 2019 14:00 UTC").toISOString(),
+      checkOut: new Date("23 Jul 2019 14:00 UTC").toISOString(),
     },
   ];
 
@@ -315,8 +315,8 @@ describe("Room and Booking: availableRooms()", () => {
     expect(
       availableRooms({
         rooms: [...rooms],
-        startDate: "1 Jan 2019 14:00 UTC",
-        endDate: "23 Jul 2019 14:00 UTC",
+        startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        endDate: new Date("23 Jul 2019 14:00 UTC").toISOString(),
       })
     ).toBe(totalAvailablesRooms);
   });
@@ -342,8 +342,8 @@ describe("Room and Booking: availableRooms()", () => {
     expect(
       availableRooms({
         rooms: [...rooms],
-        startDate: "1 Jan 2019 14:00 UTC",
-        endDate: "23 Jul 2019 14:00 UTC",
+        startDate: new Date("1 Jan 2019 14:00 UTC").toISOString(),
+        endDate:new Date("23 Jul 2019 14:00 UTC").toISOString(),
       })
     ).toBeFalsy();
   });
