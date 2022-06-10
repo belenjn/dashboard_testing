@@ -20,18 +20,58 @@ class Room {
   }
 
   occupancyPercentage(startDate, endDate) {
+    /*
+fechas de filtrado
+10/06/2020 
+01/10/2020 
+--------------
+bookings
+Check in :12/06/2020 
+Check out: 14/06/2020
+---------
+startDate >= bookings[i].checkIn 
+10/06/2020 >= 12/06/2020 && 01/10/2020 <= 14/06/2020
+
+endDate <= bookings[i].checkOut
+
+
+
+-------
+otra habitacion
+bookings
+Check in :06/06/2020 
+Check out: 14/06/2020
+
+////////////////////////////////
+fechas de filtrado
+10/06/2020 
+20/06/2020 
+occupancypercentage ( 10 días)
+? ¿Cuántos días de el rango esta ocupada?
+10/06/2020 is ocuupied => nombre || false
+11/06/2020 is ocuupied => nombre || false
+12/06/2020 is ocuupied => nombre || false
+13/06/2020 is ocuupied => nombre || false
+14/06/2020 is ocuupied => nombre || false
+15/06/2020 is ocuupied => nombre || false
+11/06/2020 is ocuupied => nombre || false
+let countDaysOcuppied= 0;
+if(room.isOccupied){
+  countDaysOcuupied++;
+}
+return ( countDaysOccupied/10días )*100
+*/
     const bookings = this.bookings;
 
     let reservedBookings = []; // array for the reserved bookings
-    let totalNumberOfBookings = this.bookings.length; // total number of the bookings
 
     for (let i = 0; i < bookings.length; i++) {
       if (startDate >= bookings[i].checkIn && endDate <= bookings[i].checkOut) {
-        reservedBookings.push(this.bookings[i]);
+        reservedBookings.push(bookings[i]);
       }
     }
 
-    return Math.round((reservedBookings.length / totalNumberOfBookings) * 100); // and return the rounded percentage
+    return Math.round((reservedBookings.length / bookings.length) * 100); // and return the rounded percentage
   }
 }
 
