@@ -68,7 +68,7 @@ const totalOccupancyPercentage = (rooms, startDate, endDate) => {
 };
 
 const availableRooms = (rooms, startDate, endDate) => {
-  const totalPercentage = 100; // the highest valur of a % is 100
+  const totalPercentage = 100; // the highest value of the % is 100
 
   const occupancyRooms = totalOccupancyPercentage(rooms, startDate, endDate); // total % of occupied rooms
   const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
