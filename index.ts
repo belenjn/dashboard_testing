@@ -40,7 +40,13 @@ class Room implements RoomData {
     return false;
   }
 
-  occupancyPercentage(startDate: Date, endDate: Date) {
+  occupancyPercentage({
+    startDate,
+    endDate,
+  }: {
+    startDate: Date;
+    endDate: Date;
+  }): number {
     const bookings = this.bookings;
 
     let reservedBookings = []; // array for the reserved bookings
@@ -82,30 +88,44 @@ class Booking implements BookingData {
   }
 }
 
+const totalOccupancyPercentage = ({
+  rooms,
+  startDate,
+  endDate,
+}: {
+  rooms: Array<Room>;
+  startDate: Date;
+  endDate: Date;
+}) => {
+  const totalDaysIsOccupied = rooms
+    .map((room) =>
+      room.occupancyPercentage({ startDate: startDate, endDate: endDate })
+    )
+    .reduce((prevValue, currentValue) => currentValue + prevValue, 0);
+  const results = Math.round(totalDaysIsOccupied / rooms.length);
+  return results;
+};
 
-// const totalOccupancyPercentage = (rooms, startDate, endDate) => {
-//   const totalRooms = rooms.length; // total number of rooms
+const availableRooms = ({
+  rooms,
+  startDate,
+  endDate,
+}: {
+  rooms: Array<Room>;
+  startDate: Date;
+  endDate: Date;
+}) => {
+  const totalPercentage = 100; // the highest value of the % is 100
 
-//   const totalPercentagePerRoom = occupancyPercentage(startDate, endDate); // % per room
-//   const totalPercentagePerRoomInDecimal = Math.round(
-//     totalPercentagePerRoom / 100
-//   ); // convert the % in decimal (per room)
+  const occupancyRooms = totalOccupancyPercentage({
+    rooms: rooms,
+    startDate: startDate,
+    endDate: endDate,
+  }); // total % of occupied rooms
+  const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
 
-//   const totalPercentageOfRooms =
-//     Math.round(totalRooms * totalPercentagePerRoomInDecimal) / 100; // multiplies total rooms per the percentage in decimal and is divided to have the % total
-//   return totalPercentageOfRooms;
-// };
+  const totalPercentageOfAvailableRooms =
+    Math.round(totalPercentage - occupancyRoomsInDecimal) * 100; // calculate the % of the available rooms
 
-// const availableRooms = (rooms, startDate, endDate) => {
-//   const totalPercentage = 100; // the highest value of the % is 100
-
-//   const occupancyRooms = totalOccupancyPercentage(rooms, startDate, endDate); // total % of occupied rooms
-//   const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
-
-//   const totalPercentageOfAvailableRooms =
-//     Math.round(totalPercentage - occupancyRoomsInDecimal) * 100; // calculate the % of the available rooms
-
-//   return totalPercentageOfAvailableRooms;
-// };
-
-// module.exports = { Room, Booking, totalOccupancyPercentage, availableRooms };
+  return totalPercentageOfAvailableRooms;
+};
