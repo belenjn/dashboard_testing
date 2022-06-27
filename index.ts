@@ -81,3 +81,31 @@ class Booking implements BookingData {
     return price;
   }
 }
+
+
+// const totalOccupancyPercentage = (rooms, startDate, endDate) => {
+//   const totalRooms = rooms.length; // total number of rooms
+
+//   const totalPercentagePerRoom = occupancyPercentage(startDate, endDate); // % per room
+//   const totalPercentagePerRoomInDecimal = Math.round(
+//     totalPercentagePerRoom / 100
+//   ); // convert the % in decimal (per room)
+
+//   const totalPercentageOfRooms =
+//     Math.round(totalRooms * totalPercentagePerRoomInDecimal) / 100; // multiplies total rooms per the percentage in decimal and is divided to have the % total
+//   return totalPercentageOfRooms;
+// };
+
+// const availableRooms = (rooms, startDate, endDate) => {
+//   const totalPercentage = 100; // the highest value of the % is 100
+
+//   const occupancyRooms = totalOccupancyPercentage(rooms, startDate, endDate); // total % of occupied rooms
+//   const occupancyRoomsInDecimal = Math.round(occupancyRooms / 100); // total % of occupied rooms to decimal
+
+//   const totalPercentageOfAvailableRooms =
+//     Math.round(totalPercentage - occupancyRoomsInDecimal) * 100; // calculate the % of the available rooms
+
+//   return totalPercentageOfAvailableRooms;
+// };
+
+// module.exports = { Room, Booking, totalOccupancyPercentage, availableRooms };
