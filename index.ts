@@ -1,20 +1,20 @@
-interface BookingData {
+export interface BookingData {
   name: string;
   email: string;
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: string;
+  checkOut: string;
   discount: number;
   room: Room;
 }
 
-interface RoomData {
+export interface RoomData {
   name: string;
   bookings: Array<BookingData>;
   rate: number;
   discount: number;
 }
 
-class Room implements RoomData {
+export class Room implements RoomData {
   name;
   bookings;
   rate;
@@ -27,7 +27,7 @@ class Room implements RoomData {
     this.discount = discount;
   }
 
-  isOccupied(date: Date) {
+  isOccupied(date: string) {
     const bookings = this.bookings;
     if (this.bookings.length) {
       // if the date matches a date's reservation
@@ -44,8 +44,8 @@ class Room implements RoomData {
     startDate,
     endDate,
   }: {
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
   }): number {
     const bookings = this.bookings;
 
@@ -61,7 +61,7 @@ class Room implements RoomData {
   }
 }
 
-class Booking implements BookingData {
+export class Booking implements BookingData {
   name;
   email;
   checkIn;
@@ -69,7 +69,7 @@ class Booking implements BookingData {
   discount;
   room;
 
-  constructor({ name, email, checkIn, checkOut, discount, room }) {
+  constructor({ name, email, checkIn, checkOut, discount, room }: BookingData) {
     this.name = name;
     this.email = email;
     this.checkIn = checkIn;
@@ -88,14 +88,14 @@ class Booking implements BookingData {
   }
 }
 
-const totalOccupancyPercentage = ({
+export const totalOccupancyPercentage = ({
   rooms,
   startDate,
   endDate,
 }: {
   rooms: Array<Room>;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }) => {
   const totalDaysIsOccupied = rooms
     .map((room) =>
@@ -106,14 +106,14 @@ const totalOccupancyPercentage = ({
   return results;
 };
 
-const availableRooms = ({
+export const availableRooms = ({
   rooms,
   startDate,
   endDate,
 }: {
   rooms: Array<Room>;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }) => {
   const totalPercentage = 100; // the highest value of the % is 100
 
