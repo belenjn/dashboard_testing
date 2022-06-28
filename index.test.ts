@@ -7,6 +7,7 @@ import {
   BookingData,
 } from "./index";
 
+
 const roomTemplateExample: RoomData = {
   name: "suite",
   bookings: [],
