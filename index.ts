@@ -27,7 +27,7 @@ export class Room implements RoomData {
     this.discount = discount;
   }
 
-  isOccupied(date: string) {
+  isOccupied(date: string) : boolean|string {
     const bookings = this.bookings;
     if (this.bookings.length) {
       // if the date matches a date's reservation
